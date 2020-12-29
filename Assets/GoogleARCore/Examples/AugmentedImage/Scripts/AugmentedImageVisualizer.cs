@@ -26,6 +26,7 @@ namespace GoogleARCore.Examples.AugmentedImage
     using GoogleARCore;
     using GoogleARCoreInternal;
     using UnityEngine;
+    using TMPro;
 
     /// <summary>
     /// Uses 4 frame corner objects to visualize an AugmentedImage.
@@ -87,6 +88,23 @@ namespace GoogleARCore.Examples.AugmentedImage
             FrameUpperRight.transform.localPosition =
                 (halfWidth * Vector3.right) + (halfHeight * Vector3.forward);
             //Text.transform.localPosition = (Vector3.up * 10.0f) + (halfHeight * Vector3.back);
+            Text.SetActive(false);
+
+            TextMeshPro textMeshProUGUI = Text.GetComponent<TextMeshPro>() ?? gameObject.AddComponent<TextMeshPro>();
+
+            textMeshProUGUI.SetText("random text");
+            textMeshProUGUI.text = "Annotation not specified for image";
+            if (Image.Name == "Twins")
+            {
+                textMeshProUGUI.text = "This is the twins";
+            }
+            if (Image.Name == "Earth")
+            {
+                textMeshProUGUI.text = "This is Earth";
+            }
+            //textMeshProUGUI.isOverlay = true;
+
+            textMeshProUGUI.ForceMeshUpdate();
             Text.SetActive(true);
             FrameLowerLeft.SetActive(true);
             FrameLowerRight.SetActive(true);
